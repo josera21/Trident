@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Trident</string>
+    <string name="slogan">Vamos a BEBER!!</string>
+    <string name="btn_play">Jugar</string>
+    <string name="btn_restar">Reiniciar</string>
+    <string name="tv_piezasfaltan">Piezas Faltantes</string>
+    <string name="menu_settings">Reglas del Juego</string>
+    <string name="reglas_titulo">Aprende a Jugar</string>
+    <string name="txt_presionaverde">Bienvenido</string>
+
+
+    <string name="reglas_primer_parrafo">
+        Jugar al Triki o Trident es muy facil, solo deben realizar las acciones
+        dependiendo de las diferentes combinaciones que se van generando mediante
+        las piezas que va sacando cada jugador.
+    </string>
+
+    <string name="reglas_triki">
+            para empezar a jugar primero se debe encontrar a el Triki,
+        el cual sera la persona que saque en la primera ronda la
+        pieza Doble tres(3)
+    </string>
+
+    <string name="reglas_explicacion1">
+        1. <b>Pieza blanco:</b> Toma quien ponga de ultimo la mano en la mesa
+    </string>
+    <string name="reglas_explicacion2">
+        2. <b>Pieza 1:</b> Toma la persona que esta sacando la pieza (es decir la de turno)
+    </string>
+    <string name="reglas_explicacion3">
+        3. <b>Pieza 2:</b> Toma la persona que elija quien este de turno
+    </string>
+    <string name="reglas_explicacion4">
+        4. <b>Pieza 3:</b> Toma la persona que quedo de Triki
+    </string>
+    <string name="reglas_explicacion5">
+        5. <b>Pieza 4:</b> Toma la persona que este a la derecha de quien saco la pieza
+    </string>
+    <string name="reglas_explicacion6">
+        6. <b>Pieza 5:</b> Toma la persona que este a la izquierda de quien saco la pieza
+    </string>
+    <string name="reglas_explicacion7">
+        7. <b>Pieza 6:</b> Toma la ultima persona que se coloque la mano en la frente.
+    </string>
+
+
+    <string name="jugada1">Nadie Bebe</string>
+    <string name="jugada2">Bebes tu</string>
+    <string name="jugada3">Bebe quien tu decidas</string>
+    <string name="jugada4">Bebe el triki</string>
+    <string name="jugada5">Bebe el de tu derecha</string>
+    <string name="jugada6">Bebe el de tu izquierda</string>
+    <string name="jugada7">Toma el ultimo en ponerse la mano</string>
+    <string name="jugada8">Tomas 2 veces</string>
+    <string name="jugada9">Bebes tu y quien elijas</string>
+    <string name="jugada10">Bebes tu y el triki</string>
+    <string name="jugada11">Bebes tu y el de la derecha</string>
+    <string name="jugada12">Bebes tu y el de la izquierda</string>
+    <string name="jugada13">Bebes tu y el ultimo en ponerse la mano</string>
+    <string name="jugada14">Toma 2 veces quien tu decidas</string>
+    <string name="jugada15">Toma quien elijas y el triki</string>
+    <string name="jugada16">Toma quien elijas y el de la derecha</string>
+    <string name="jugada17">Toma quien decidas y el de la izquierda</string>
+    <string name="jugada18">Toma quien decidas y el ultimo en ponerse la mano</string>
+    <string name="jugada19">Bebe el triki par de veces</string>
+    <string name="jugada20">Toma el de la derecha y el triki</string>
+    <string name="jugada21">Bebe el triki y el de la izquierda</string>
+    <string name="jugada22">Toma el triki y el ultimo en ponerse la mano</string>
+    <string name="jugada23">Bebe dos veces el de la derecha</string>
+    <string name="jugada24">Bebe el de la derecha e izquierda</string>
+    <string name="jugada25">Toma el de la derecha y el ultimo en ponerse la mano</string>
+    <string name="jugada26">Bebe dos veces el de la izquierda</string>
+    <string name="jugada27">Toma el de la izquierda y el ultimo en ponerse la mano</string>
+    <string name="jugada28">Toma dos veces el ultimo en ponerse la mano</string>
+
+</resources>
+
