@@ -10,21 +10,13 @@
 ## Screenshots
 
 ### Main page
-<p align="center">
 <img src="https://k60.kn3.net/3/0/A/7/9/0/F4E.png" width="50%">
-</p>
 
 ### In game
-<p align="center">
 <img src="https://k60.kn3.net/2/B/5/4/F/2/D0A.png" width="50%">
-</p>
 
 ### End game
-<p align="center">
 <img src="https://k60.kn3.net/B/8/3/6/A/8/26B.png" width="50%">
-</p>
 
 ### Rules explanation
-<p align="center">
 <img src="https://k60.kn3.net/5/B/A/8/1/A/54D.png" width="50%">
-</p>
