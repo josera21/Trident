@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btnPlay;
     Button btnRestart;
-    ImageView imageView;
-    TextView txtView;
+    ImageView piezaView;
+    TextView txtFaltantes;
     TextView txtJugada;
     TextView txtMarcador;
     MediaPlayer mp;
@@ -38,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnPlay = (Button) findViewById(R.id.play);
         btnRestart = (Button) findViewById(R.id.restart);
-        imageView = (ImageView) findViewById(R.id.imageView);
-        txtView = (TextView) findViewById(R.id.textView2);
+        piezaView = (ImageView) findViewById(R.id.piezaView);
+        txtFaltantes = (TextView) findViewById(R.id.faltantesView);
         txtJugada = (TextView) findViewById(R.id.tv_jugada);
         txtMarcador = (TextView) findViewById(R.id.txtMarcador);
         listaUsados = new ArrayList();
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         animacion();
         //Mostrando cuantas piezas van.
-        txtView.setText(contPiezas());
+        txtFaltantes.setText(contPiezas());
     }
 
     private String contPiezas() {
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void colocarImg(String nombreImg) {
         int id = getResources().getIdentifier(nombreImg, "drawable", getPackageName());
-        imageView.setImageResource(id);
+        piezaView.setImageResource(id);
     }
 
     public int generar() {
@@ -276,13 +275,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animacionBnt();
         btnPlay.setVisibility(View.INVISIBLE);
         txtMarcador.setVisibility(View.VISIBLE);
-        imageView.setOnClickListener(this);
+        piezaView.setOnClickListener(this);
     }
 
     public void restart(View v) {
         listaUsados.clear();
         String colocar = String.valueOf(28);
-        txtView.setText(colocar);
+        txtFaltantes.setText(colocar);
         animacionBnt();
         txtJugada.setText(R.string.txt_presionaverde);
         colocarImg("welcome2");
@@ -293,27 +292,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Animation aparecer;
         aparecer = AnimationUtils.loadAnimation(this, R.anim.aparecer);
         aparecer.reset();
-        imageView.setAnimation(aparecer);
+        piezaView.setAnimation(aparecer);
     }
 
     public void animacionZoom() {
         Animation zoom;
         zoom = AnimationUtils.loadAnimation(this, R.anim.pasar);
         zoom.reset();
-        imageView.setAnimation(zoom);
+        piezaView.setAnimation(zoom);
     }
 
     public void animacionTransparente() {
         Animation transparent;
         transparent = AnimationUtils.loadAnimation(this, R.anim.transparencia);
         transparent.reset();
-        imageView.setAnimation(transparent);
+        piezaView.setAnimation(transparent);
     }
 
     private void cambiarFuente() {
         Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Rubik-Black.ttf");
         txtJugada.setTypeface(customFont);
-        txtView.setTypeface(customFont);
+        txtFaltantes.setTypeface(customFont);
         txtMarcador.setTypeface(customFont);
     }
 }
