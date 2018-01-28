@@ -13,10 +13,10 @@
 <img src="https://k60.kn3.net/3/0/A/7/9/0/F4E.png" width="50%">
 
 ### In game
-<img src="https://k60.kn3.net/2/B/5/4/F/2/D0A.png" width="50%">
+<img src="https://k60.kn3.net/CDEE28E9D.jpg" width="50%">
 
 ### End game
 <img src="https://k60.kn3.net/B/8/3/6/A/8/26B.png" width="50%">
 
 ### Rules explanation
-<img src="https://k60.kn3.net/5/B/A/8/1/A/54D.png" width="50%">
+<img src="https://k60.kn3.net/5D788CDAF.jpg" width="50%">
