@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtJugada.setText(R.string.txt_presionaverde);
         txtMarcador.setVisibility(View.INVISIBLE);
 
+        btnPlay.setOnClickListener(this);
+
         cambiarFuente();
         colocarImg("welcome2");
 
@@ -76,6 +82,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        if (v.getId() == btnPlay.getId()) {
+            animacionBnt(btnPlay);
+            txtMarcador.setVisibility(View.VISIBLE);
+            piezaView.setOnClickListener(this);
+        }
+
         //Asignando imagen de pieza
         String imgName = "img" + generar();
         if (imgName.equals("img19")) {
@@ -135,40 +148,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void animacion() {
+        // Animations with DaimajiaAnimations Library
         Random aleatorio = new Random();
-        int azar = aleatorio.nextInt(3);
+        int azar = aleatorio.nextInt(5);
 
         switch (azar) {
             case 0:
-                animacionAparecer();
+                YoYo.with(Techniques.ZoomInUp).duration(700).playOn(piezaView);
                 break;
             case 1:
-                animacionZoom();
+                YoYo.with(Techniques.RubberBand).duration(700).playOn(piezaView);
                 break;
             case 2:
-                animacionTransparente();
+                YoYo.with(Techniques.Pulse).repeat(2).duration(500).playOn(piezaView);
+                break;
+            case 3:
+                YoYo.with(Techniques.FlipInX).duration(700).playOn(piezaView);
+                break;
+            case 4:
+                YoYo.with(Techniques.FlipInY).duration(700).playOn(piezaView);
                 break;
             default:
-                animacionAparecer();
+                YoYo.with(Techniques.Tada).duration(700).playOn(piezaView);
         }
     }
 
-    private void animacionBnt() {
-        if (btnPlay.getVisibility()== View.INVISIBLE)
-        {
-            btnPlay.setVisibility(View.VISIBLE);
-            Animation animBoton;
-            animBoton = AnimationUtils.loadAnimation(this,R.anim.mostrar);
-            animBoton.reset();
-            btnPlay.setAnimation(animBoton);
-        }
+    private void animacionBnt(View v) {
+        if (v.getId() == btnRestart.getId())
+            YoYo.with(Techniques.ZoomInLeft).duration(1000).playOn(btnPlay);
         else
-        {
-            Animation animBoton;
-            animBoton = AnimationUtils.loadAnimation(this,R.anim.ocultar);
-            animBoton.reset();
-            btnPlay.setAnimation(animBoton);
-        }
+            YoYo.with(Techniques.ZoomOutLeft).duration(1000).playOn(btnPlay);
     }
 
     public String jugada(String leer) {
@@ -260,9 +269,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tomarString = getString(R.string.jugada28);
                 return tomarString;
             default:
+                return "";
         }
-        //FALTA PROBAR CON EL BREAK
-        return "";
     }
 
     public void sonido()
@@ -270,43 +278,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mp.start();
     }
 
-    public void playOne(View v) {
-        onClick(v);
-        animacionBnt();
-        btnPlay.setVisibility(View.INVISIBLE);
-        txtMarcador.setVisibility(View.VISIBLE);
-        piezaView.setOnClickListener(this);
-    }
-
     public void restart(View v) {
         listaUsados.clear();
         String colocar = String.valueOf(28);
         txtFaltantes.setText(colocar);
-        animacionBnt();
+        animacionBnt(btnRestart);
         txtJugada.setText(R.string.txt_presionaverde);
         colocarImg("welcome2");
-    }
-
-    //Efectos de animaciones
-    public void animacionAparecer() {
-        Animation aparecer;
-        aparecer = AnimationUtils.loadAnimation(this, R.anim.aparecer);
-        aparecer.reset();
-        piezaView.setAnimation(aparecer);
-    }
-
-    public void animacionZoom() {
-        Animation zoom;
-        zoom = AnimationUtils.loadAnimation(this, R.anim.pasar);
-        zoom.reset();
-        piezaView.setAnimation(zoom);
-    }
-
-    public void animacionTransparente() {
-        Animation transparent;
-        transparent = AnimationUtils.loadAnimation(this, R.anim.transparencia);
-        transparent.reset();
-        piezaView.setAnimation(transparent);
     }
 
     private void cambiarFuente() {
