@@ -9,30 +9,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnPlay;
-    Button btnRestart;
-    ImageView piezaView;
-    TextView txtFaltantes;
-    TextView txtJugada;
-    TextView txtMarcador;
-    MediaPlayer mp;
+    private Button btnPlay;
+    private Button btnRestart;
+    private ImageView piezaView;
+    private TextView txtFaltantes;
+    private TextView txtJugada;
+    private TextView txtMarcador;
+    private MediaPlayer piezaSound;
+    private MediaPlayer restartSound;
+    private MediaPlayer endSound;
     private ArrayList listaUsados;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +43,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtJugada = (TextView) findViewById(R.id.tv_jugada);
         txtMarcador = (TextView) findViewById(R.id.txtMarcador);
         listaUsados = new ArrayList();
-        mp = MediaPlayer.create(this, R.raw.windowsv3);
+        piezaSound = MediaPlayer.create(this, R.raw.standby);
+        restartSound = MediaPlayer.create(this, R.raw.news);
+        endSound = MediaPlayer.create(this, R.raw.dada0);
         txtJugada.setText(R.string.txt_presionaverde);
         txtMarcador.setVisibility(View.INVISIBLE);
 
         btnPlay.setOnClickListener(this);
+        btnRestart.setOnClickListener(this);
 
-        cambiarFuente();
-        colocarImg("welcome2");
-
+        changeFont();
+        putImg("welcome2");
     }
 
     @Override
@@ -88,22 +87,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             txtMarcador.setVisibility(View.VISIBLE);
             piezaView.setOnClickListener(this);
         }
-
-        //Asignando imagen de pieza
-        String imgName = "img" + generar();
-        if (imgName.equals("img19")) {
-            sonido();
-            colocarImg(imgName);
-            Toast.makeText(this, "BEBE EL TRIKI!!!", Toast.LENGTH_SHORT).show();
-            txtJugada.setText(jugada(imgName));
-        } else {
-            sonido();
-            colocarImg(imgName);
-            txtJugada.setText(jugada(imgName));
+        else if (v.getId() == btnRestart.getId()) {
+            restart();
+            return;
         }
 
+        showPlay();
         animacion();
-        //Mostrando cuantas piezas van.
         txtFaltantes.setText(contPiezas());
     }
 
@@ -112,12 +102,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return String.valueOf(28 - contador);
     }
 
-    private void colocarImg(String nombreImg) {
+    private void putImg(String nombreImg) {
         int id = getResources().getIdentifier(nombreImg, "drawable", getPackageName());
         piezaView.setImageResource(id);
     }
 
-    public int generar() {
+    public void showPlay() {
+        //Asignando imagen de pieza
+        String imgName = "img" + generateNumber();
+        if (imgName.equals("img19")) {
+            soundPieza();
+            putImg(imgName);
+            Toast.makeText(this, "BEBE EL TRIKI!!!", Toast.LENGTH_SHORT).show();
+            txtJugada.setText(showInstruction(imgName));
+        } else {
+            soundPieza();
+            putImg(imgName);
+            txtJugada.setText(showInstruction(imgName));
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public int generateNumber() {
         Random random = new Random();
         if (listaUsados.size() < 28) {
             int agarrar = random.nextInt(28) + 1;
@@ -126,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return agarrar;
             } else {
                 if (listaUsados.contains(agarrar)) {
-                    return generar();
+                    return generateNumber();
                 } else {
                     listaUsados.add(agarrar);
                     return agarrar;
@@ -134,17 +140,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else {
             //Llamando al Dialogo creado.
-            DialogoFin();
+            endGame();
             return -1;
         }
-
     }
 
-    public void DialogoFin()
-    {
+    public void endGame() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         DialogoFin fin = new DialogoFin();
         fin.show(fragmentManager, "TagFin");
+        soundEnd();
     }
 
     public void animacion() {
@@ -180,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             YoYo.with(Techniques.ZoomOutLeft).duration(1000).playOn(btnPlay);
     }
 
-    public String jugada(String leer) {
+    public String showInstruction(String leer) {
         String tomarString;
 
         switch (leer) {
@@ -273,21 +278,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void sonido()
-    {
-        mp.start();
+    private void soundPieza() {
+        piezaSound.start();
     }
 
-    public void restart(View v) {
+    private void soundRestar() {
+        restartSound.start();
+    }
+
+    private void soundEnd() {
+        endSound.start();
+    }
+
+    private void restart() {
         listaUsados.clear();
         String colocar = String.valueOf(28);
         txtFaltantes.setText(colocar);
         animacionBnt(btnRestart);
         txtJugada.setText(R.string.txt_presionaverde);
-        colocarImg("welcome2");
+        putImg("welcome2");
+        soundRestar();
     }
 
-    private void cambiarFuente() {
+    private void changeFont() {
         Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Rubik-Black.ttf");
         txtJugada.setTypeface(customFont);
         txtFaltantes.setTypeface(customFont);

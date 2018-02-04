@@ -64,7 +64,6 @@
             android:textSize="20sp"
             android:textColor="#fff"
             android:background="@drawable/boton_restart"
-            android:onClick="restart"
             android:layout_row="0"
             android:layout_column="10" />
     </GridLayout>
